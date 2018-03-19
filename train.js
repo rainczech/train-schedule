@@ -36,7 +36,7 @@ $("#submit-button").on("click", function(event) {
     console.log(newTrain.destination);
     console.log(newTrain.time);
     console.log(newTrain.frequency);
-
+    // clears values
     $("#train-name-input").val("");
     $("#destination-input").val("");
     $("#time-input").val("");
@@ -44,6 +44,23 @@ $("#submit-button").on("click", function(event) {
 
 })
 
+database.ref().on("child_added", function(childSnapshot, prevChildKey){
+    var trainName = childSnapshot.val().train;
+    var endPoint = childSnapshot.val().destination;
+    var timeStart = childSnapshot.val().time;
+    var frequency = childSnapshot.val().frequency;
+
+    console.log(trainName);
+    console.log(endPoint);
+    console.log(timeStart);
+    console.log(frequency);
+
+    
+
+
+
+
+})
 
 
 // converting time
