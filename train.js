@@ -7,3 +7,45 @@ var config = {
     messagingSenderId: "967691471378"
   };
   firebase.initializeApp(config);
+
+  var database = firebase.database();
+
+//   global variables
+
+
+
+
+  // button for adding train
+$("#submit-button").on("click", function(event) {
+    event.preventDefault();
+    var trainName = $("#train-name-input").val().trim();
+    var endPoint = $("#destination-input").val().trim();
+    var timeStart = $("#time-input").val().trim();
+    var frequency = $("#frequency-input").val().trim();
+
+    var newTrain = {
+        train: trainName,
+        destination: endPoint,
+        time: timeStart,
+        frequency: frequency
+    };
+
+    database.ref().push(newTrain);
+    // console log to test
+    console.log(newTrain.train);
+    console.log(newTrain.destination);
+    console.log(newTrain.time);
+    console.log(newTrain.frequency);
+
+    $("#train-name-input").val("");
+    $("#destination-input").val("");
+    $("#time-input").val("");
+    $("#frequency-input").val("");
+
+})
+
+
+
+// converting time
+
+
