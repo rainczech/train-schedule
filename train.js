@@ -14,7 +14,6 @@ var config = {
 
 
 
-
   // button for adding train
 $("#submit-button").on("click", function(event) {
     event.preventDefault();
@@ -55,13 +54,34 @@ database.ref().on("child_added", function(childSnapshot, prevChildKey){
     console.log(timeStart);
     console.log(frequency);
 
+
+
     
 
 
+var currentTime = moment();
+    console.log("CURRENT TIME: " + moment(currentTime).format("kk:mm"));
+
+    var firstTimeConverted = moment(timeStart, "kk:mm")
 
 
-})
+    var diffTime = moment().diff(moment(firstTimeConverted), "minutes");
+    console.log("DIFFERENCE IN TIME: " + diffTime);
 
+
+    var tRemainder = diffTime % frequency;
+    console.log(tRemainder);
+
+    var tMinutesTillTrain = frequency - tRemainder;
+    console.log("MINUTES TILL TRAIN: " + tMinutesTillTrain);
+
+    var nextTrain = moment().add(tMinutesTillTrain, "minutes");
+    console.log("ARRIVAL TIME: " + moment(nextTrain).format("kk:mm"));
+
+    $(".train-table").append("<tr><td>"+trainName+"</td><td>"+ endPoint +"</td><td>"+frequency +"</td><td>" + nextTrain +"</td><td>" + tMinutesTillTrain+"</td></tr>")
+
+
+});
 
 // converting time
 
